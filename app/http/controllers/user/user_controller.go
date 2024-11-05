@@ -1,4 +1,4 @@
-package controllers
+package user
 
 import (
 	"github.com/goravel/framework/contracts/http"
