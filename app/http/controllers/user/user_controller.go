@@ -4,6 +4,7 @@ import (
 	"github.com/goravel/framework/contracts/http"
 	"github.com/goravel/framework/facades"
 	"goravel/app/models"
+	"goravel/app/http/requests/user"
 )
 
 type UserController struct {
@@ -32,6 +33,14 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 		})
 	}
 
+	var updateUser UpdateUserRequest
+	errors, err := ctx.Request().ValidateRequest(&updateUser)
+	if err != nil {
+		facades.Log().Debug(err)
+	}
+
+
+	
 	// Obtener datos del request
 	id := ctx.Request().Input("ID") // ID del usuario a actualizar
 	name := ctx.Request().Input("name")
