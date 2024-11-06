@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/goravel/framework/database/orm"
 	"github.com/goravel/framework/facades"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
