@@ -1,0 +1,12 @@
+{
+  "required": {
+    "user_id": "UserID is required"
+  },
+  "policies": {
+    "unmatch_users": "Los usuarios no coinciden",
+  },
+  "user_update": {
+    "success": "Usuario actualizado correctamente",
+    "failure": "Error al actualizar el usuario",
+  }
+}

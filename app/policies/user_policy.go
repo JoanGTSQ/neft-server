@@ -2,11 +2,11 @@ package policies
 
 import (
 	"context"
-	"goravel/app/models"
-	"strconv"
-
 	"github.com/goravel/framework/auth/access"
 	contractsaccess "github.com/goravel/framework/contracts/auth/access"
+	"github.com/goravel/framework/facades"
+	"goravel/app/models"
+	"strconv"
 )
 
 type UserPolicy struct {
@@ -24,6 +24,6 @@ func (r *UserPolicy) Update(ctx context.Context, arguments map[string]any) contr
 	if userID == targetUserID {
 		return access.NewAllowResponse()
 	} else {
-		return access.NewDenyResponse("You do not own this post.")
+		return access.NewDenyResponse(facades.Lang(ctx).Get("policies.unmatch_users"))
 	}
 }

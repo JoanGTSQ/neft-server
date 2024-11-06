@@ -16,11 +16,6 @@ func NewUserController() *UserController {
 	}
 }
 
-func (r *UserController) Show(ctx http.Context) http.Response {
-	return ctx.Response().Success().Json(http.Json{
-		"Hello": "Goravel",
-	})
-}
 func (u *UserController) Update(ctx http.Context) http.Response {
 	// Obtener el usuario del contexto
 	userValue := ctx.Value("user")
@@ -60,7 +55,7 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 	}
 
 	return ctx.Response().Json(http.StatusOK, http.Json{
-		"message": "Datos actualizados con éxito",
+		"message": facades.Lang(ctx).Get("user_update.success"),
 		"user":    user,
 	})
 }
