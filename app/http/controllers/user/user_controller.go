@@ -55,7 +55,7 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 	}
 
 	return ctx.Response().Json(http.StatusOK, http.Json{
-		"message": facades.Lang(ctx).Get("user_update.success"),
+		"message": facades.Lang(ctx).Get("user.update.success"),
 		"user":    user,
 	})
 }

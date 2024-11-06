@@ -13,7 +13,7 @@ func AuthMiddleware() http.Middleware {
 		_, err := facades.Auth(ctx).Parse(token)
 		if err != nil {
 			ctx.Response().Json(http.StatusUnauthorized, http.Json{
-				"error": "Usuario no válido",
+				"error": facades.Lang(ctx).Get("auth.user_not_valid"),
 			})
 			return
 		}
@@ -22,7 +22,7 @@ func AuthMiddleware() http.Middleware {
 		err = facades.Auth(ctx).User(&user)
 		if err != nil {
 			ctx.Response().Json(http.StatusUnauthorized, http.Json{
-				"error": "Usuario no válido",
+				"error": facades.Lang(ctx).Get("auth.error_login"),
 			})
 			// Abortamos si no se pudo obtener el usuario
 			return
@@ -31,8 +31,6 @@ func AuthMiddleware() http.Middleware {
 		// Almacena el usuario en el contexto
 		ctx.WithValue("user", user)
 
-		// Log para verificar que el usuario se ha almacenado
-		facades.Log().Debug("Usuario autenticado:", user)
 
 		ctx.Request().Next() // Continuar con la siguiente función middleware o controlador
 	}

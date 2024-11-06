@@ -5,8 +5,14 @@
   "policies": {
     "unmatch_users": "Los usuarios no coinciden",
   },
-  "user_update": {
-    "success": "Usuario actualizado correctamente",
-    "failure": "Error al actualizar el usuario",
+  "user":{
+    "update": {
+      "success": "Usuario actualizado correctamente",
+      "failure": "Error al actualizar el usuario",
+    }
+  },
+  "auth":{
+    "user_not_valid": "Credenciales no válidas",
+    "error_login": "Error al iniciar sesión",
   }
 }
