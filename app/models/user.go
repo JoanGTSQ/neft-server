@@ -17,7 +17,7 @@ type User struct {
 
 // HashPassword encripta la contraseña y la asigna al usuario
 func (u *User) HashPassword(password string) error {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hashedPassword, err := facades.Hash().Make(password)
 	if err != nil {
 		return err
 	}
@@ -52,10 +52,16 @@ func (u *User) SearchByEmail() error {
 	return facades.Orm().Query().Where("email = ?", u.Email).FirstOrFail(&u)
 }
 
+func (u *User) SearchById(id int) error {
+	return facades.Orm().Query().Where("id = ?", u.ID).FindOrFail(&u)
+}
+
 // CheckPassword compara una contraseña en texto plano con el hash almacenado
 func (u *User) CheckPassword(password string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
-	return err == nil
+	if facades.Hash().Check(password, u.Password) {
+		return true
+	}
+	return false
 }
 
 func validateUserUpdate(name, email, password, avatar string) error {
@@ -78,13 +84,10 @@ func (u *User) Update(name, email, password, avatar string) error {
 	u.Name = name
 	u.Email = email
 
+	
 	// Encriptar la nueva contraseña solo si se proporciona
 	if password != "" {
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-		if err != nil {
-			return err
-		}
-		u.Password = string(hashedPassword)
+		u.HashPassword(password)
 	}
 
 	// Asignar avatar si se proporciona
