@@ -24,6 +24,6 @@ func (r *UserPolicy) Update(ctx context.Context, arguments map[string]any) contr
 	if userID == targetUserID {
 		return access.NewAllowResponse()
 	} else {
-		return access.NewDenyResponse(facades.Lang(ctx).Get("policies.unmatch_users"))
+		return access.NewDenyResponse(facades.Lang(ctx).Get("user.policies.unmatch_users"))
 	}
 }

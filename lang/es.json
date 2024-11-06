@@ -2,17 +2,33 @@
   "required": {
     "user_id": "UserID is required"
   },
-  "policies": {
-    "unmatch_users": "Los usuarios no coinciden",
+  "jwt": {
+    "token_failure": "No se pudo generar el token"
   },
   "user":{
+    "create": {
+      "success": "Usuario creado correctamente",
+      "failure": "No se ha podido crear el usuario"
+    },
     "update": {
       "success": "Usuario actualizado correctamente",
-      "failure": "Error al actualizar el usuario",
+      "failure": "Error al actualizar el usuario"
+    },
+    "policies": {
+      "unmatch_users": "Los usuarios no coinciden",
+      "denied": "No puedes modificar este usuario"
+    },
+    "validator": {
+      "form_invalid": "Formulario enviado no correcto"
     }
   },
   "auth":{
     "user_not_valid": "Credenciales no válidas",
     "error_login": "Error al iniciar sesión",
+    "error_password": "No se ha podido generar la contraseña",
+    "logout": {
+      "success": "Sesión cerrada correctamente",
+      "failure": "No se ha podido cerrar sesión"
+    }
   }
 }

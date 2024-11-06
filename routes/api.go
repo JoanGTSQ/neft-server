@@ -15,4 +15,5 @@ func Api() {
 	facades.Route().Post("/logout", authController.Logout)
 	facades.Route().Put("/register", authController.Register)
 	facades.Route().Middleware(middleware.AuthMiddleware()).Post("users", userController.Update)
+	facades.Route().Middleware(middleware.AuthMiddleware()).Get("user", userController.Show)
 }

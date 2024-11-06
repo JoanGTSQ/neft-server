@@ -3,8 +3,8 @@ package user
 import (
 	"github.com/goravel/framework/contracts/http"
 	"github.com/goravel/framework/facades"
+	"goravel/app/http/requests"
 	"goravel/app/models"
-	"goravel/app/http/requests/user"
 )
 
 type UserController struct {
@@ -17,30 +17,27 @@ func NewUserController() *UserController {
 	}
 }
 
+func (u *UserController) Show(ctx http.Context) http.Response {
+	user := ctx.Value("user").(models.User)
+	return ctx.Response().Json(http.StatusOK, user)
+}
+
 func (u *UserController) Update(ctx http.Context) http.Response {
 	// Obtener el usuario del contexto
-	userValue := ctx.Value("user")
-	if userValue == nil {
-		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
-			"error": "Usuario no encontrado en el contexto",
-		})
-	}
+	user := ctx.Value("user").(models.User)
 
-	user, ok := userValue.(models.User)
-	if !ok {
-		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "Error al convertir el usuario.",
-		})
-	}
-
-	var updateUser UpdateUserRequest
+	var updateUser requests.UpdateUserRequest
 	errors, err := ctx.Request().ValidateRequest(&updateUser)
+
 	if err != nil {
 		facades.Log().Debug(err)
+	} else if errors != nil {
+		facades.Log().Error(errors)
+		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
+			"error": facades.Lang(ctx).Get("user.validator.form_invalid"),
+		})
 	}
 
-
-	
 	// Obtener datos del request
 	id := ctx.Request().Input("ID") // ID del usuario a actualizar
 	name := ctx.Request().Input("name")
@@ -52,7 +49,7 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 		"targetUserId": id,
 	}) {
 		return ctx.Response().Json(http.StatusBadRequest, http.Json{
-			"error": "No puedes modificar este usuario",
+			"error": facades.Lang(ctx).Get("user.policies.denied"),
 		})
 	}
 

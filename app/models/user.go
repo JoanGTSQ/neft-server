@@ -1,7 +1,6 @@
 package models
 
 import (
-	"errors"
 	"github.com/goravel/framework/database/orm"
 	"github.com/goravel/framework/facades"
 )
@@ -20,7 +19,15 @@ func (u *User) HashPassword(password string) error {
 	if err != nil {
 		return err
 	}
-	u.Password = string(hashedPassword)
+	u.Password = hashedPassword
+	return nil
+}
+
+func (u *User) Create() error {
+	err := facades.Orm().Query().Create(&u)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -51,7 +58,7 @@ func (u *User) SearchByEmail() error {
 	return facades.Orm().Query().Where("email = ?", u.Email).FirstOrFail(&u)
 }
 
-func (u *User) SearchById(id int) error {
+func (u *User) SearchById() error {
 	return facades.Orm().Query().Where("id = ?", u.ID).FindOrFail(&u)
 }
 
@@ -63,30 +70,17 @@ func (u *User) CheckPassword(password string) bool {
 	return false
 }
 
-func validateUserUpdate(name, email, password, avatar string) error {
-	if name == "" {
-		return errors.New("El nombre es requerido")
-	}
-	if email == "" {
-		return errors.New("El email es requerido")
-	}
-	// Puedes añadir más validaciones según sea necesario
-	return nil
-}
-
 func (u *User) Update(name, email, password, avatar string) error {
-	err := validateUserUpdate(name, email, password, avatar)
-	if err != nil {
-		return err
-	}
 
 	u.Name = name
 	u.Email = email
 
-	
 	// Encriptar la nueva contraseña solo si se proporciona
 	if password != "" {
-		u.HashPassword(password)
+		err := u.HashPassword(password)
+		if err != nil {
+			return err
+		}
 	}
 
 	// Asignar avatar si se proporciona
@@ -95,7 +89,7 @@ func (u *User) Update(name, email, password, avatar string) error {
 	}
 
 	// Aquí agregas la lógica para guardar los cambios en la base de datos
-	if err = facades.Orm().Query().Save(u); err != nil {
+	if err := facades.Orm().Query().Save(u); err != nil {
 		return err
 	}
 

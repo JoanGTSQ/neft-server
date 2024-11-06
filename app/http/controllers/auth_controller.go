@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/goravel/framework/contracts/http"
 	"github.com/goravel/framework/facades"
-	"golang.org/x/crypto/bcrypt"
+	"goravel/app/http/requests"
 	"goravel/app/models"
 )
 
@@ -54,49 +54,50 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	password := ctx.Request().Input("password")
 	name := ctx.Request().Input("name")
 
-	// Validar datos de entrada
-	if email == "" || password == "" || name == "" {
-		return ctx.Response().Json(http.StatusBadRequest, http.Json{
-			"error": "Email, nombre y contraseña son obligatorios",
+	// Valida el formulario
+	var registerUser requests.AuthRegisterRequest
+	errors, err := ctx.Request().ValidateRequest(&registerUser)
+	if err != nil {
+		facades.Log().Debug(err)
+	} else if errors != nil {
+		facades.Log().Error(errors)
+		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
+			"error": facades.Lang(ctx).Get("user.validator.form_invalid"),
 		})
 	}
 
 	// Verificar si el email ya está registrado
 	var existingUser models.User
 	existingUser.Email = email
-	err := existingUser.SearchByEmail()
+	err = existingUser.SearchByEmail()
 	if err == nil {
 		return ctx.Response().Json(http.StatusConflict, http.Json{
 			"error": "El email ya está registrado",
 		})
 	}
 
-	// Encriptar la contraseña
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "Error al encriptar la contraseña",
-		})
-	}
-
 	// Crear y guardar el nuevo usuario
 	newUser := models.User{
-		Name:     name,
-		Email:    email,
-		Password: string(hashedPassword),
+		Name:  name,
+		Email: email,
 	}
-	result := facades.Orm().Query().Create(&newUser)
-	if result != nil {
+	err = newUser.HashPassword(password)
+	if err != nil {
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "Error al crear el usuario",
+			"error": facades.Lang(ctx).Get("auth.error_password"),
 		})
 	}
 
+	if err := newUser.Create(); err != nil {
+		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
+			"error": facades.Lang(ctx).Get("user.create.failure"),
+		})
+	}
 	// Generar un token JWT para el nuevo usuario (opcional)
 	token, err := facades.Auth(ctx).Login(&newUser)
 	if err != nil {
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "No se pudo generar el token",
+			"error": facades.Lang(ctx).Get("jwt.token_failure"),
 		})
 	}
 
@@ -110,11 +111,11 @@ func (c *AuthController) Logout(ctx http.Context) http.Response {
 	err := facades.Auth(ctx).Logout()
 	if err != nil {
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "No se pudo cerrar sesión",
+			"error": facades.Lang(ctx).Get("auth.logout.failure"),
 		})
 	}
 
 	return ctx.Response().Json(http.StatusOK, http.Json{
-		"message": "Sesión cerrada correctamente",
+		"message": facades.Lang(ctx).Get("auth.logout.success"),
 	})
 }
