@@ -58,6 +58,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	// Valida el formulario
 	var registerUser requests.AuthRegisterRequest
 	errors, err := ctx.Request().ValidateRequest(&registerUser)
+	
 	if err != nil {
 		facades.Log().Debug(err)
 	} else if errors != nil {

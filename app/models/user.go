@@ -7,10 +7,11 @@ import (
 
 type User struct {
 	orm.Model
-	Name     string
-	Email    string
-	Password string
-	Avatar   string
+	Name     string `json:"name" gorm:"column:name"`
+	Email    string `json:"email" gorm:"column:email"`
+	Password string `json:"password" gorm:"column:password"`
+	Role     string `json:"role" gorm:"column:role"`
+	Avatar   string `json:"avatar" gorm:"column:avatar"`
 }
 
 // HashPassword encripta la contraseña y la asigna al usuario
@@ -31,29 +32,6 @@ func (u *User) Create() error {
 	return nil
 }
 
-// UpdateFields actualiza los campos del usuario con los datos proporcionados
-func (u *User) UpdateFields(name, email, password, avatar string) error {
-	// Actualizar solo si los campos no están vacíos
-	if name != "" {
-		u.Name = name
-	}
-	if email != "" {
-		u.Email = email
-	}
-	if avatar != "" {
-		u.Avatar = avatar
-	}
-	if password != "" {
-		if err := u.HashPassword(password); err != nil {
-			return err
-		}
-	}
-
-	// Guardar cambios en la base de datos
-	result := facades.Orm().Query().Save(u)
-	return result
-}
-
 func (u *User) SearchByEmail() error {
 	return facades.Orm().Query().Where("email = ?", u.Email).FirstOrFail(&u)
 }
@@ -70,28 +48,6 @@ func (u *User) CheckPassword(password string) bool {
 	return false
 }
 
-func (u *User) Update(name, email, password, avatar string) error {
-
-	u.Name = name
-	u.Email = email
-
-	// Encriptar la nueva contraseña solo si se proporciona
-	if password != "" {
-		err := u.HashPassword(password)
-		if err != nil {
-			return err
-		}
-	}
-
-	// Asignar avatar si se proporciona
-	if avatar != "" {
-		u.Avatar = avatar
-	}
-
-	// Aquí agregas la lógica para guardar los cambios en la base de datos
-	if err := facades.Orm().Query().Save(u); err != nil {
-		return err
-	}
-
-	return nil
+func (u *User) Update() error {
+	return facades.Orm().Query().Save(u)
 }
