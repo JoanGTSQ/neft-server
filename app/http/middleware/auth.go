@@ -23,7 +23,7 @@ func AuthMiddleware() http.Middleware {
 		err = facades.Auth(ctx).User(&user)
 		if err != nil {
 			ctx.Response().Json(http.StatusUnauthorized, http.Json{
-				"error": facades.Lang(ctx).Get("auth.error_login"),
+				"error": facades.Lang(ctx).Get("auth.login.failure"),
 			})
 			// Abortamos si no se pudo obtener el usuario
 			return

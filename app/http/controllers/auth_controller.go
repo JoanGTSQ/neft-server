@@ -23,26 +23,27 @@ func (a *AuthController) Login(ctx http.Context) http.Response {
 	err := user.SearchByEmail()
 	if err != nil {
 		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
-			"error": "Usuario no encontrado o credenciales incorrectas",
+			"error": facades.Lang(ctx).Get("auth.login.email_not_found"),
 		})
 	}
 
 	// Usar el metodo CheckPassword del modelo
 	if !user.CheckPassword(password) {
 		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
-			"error": "Credenciales incorrectas",
+			"error": facades.Lang(ctx).Get("auth.login.failure"),
 		})
 	}
 
 	token, err := facades.Auth(ctx).Login(&user)
 	if err != nil {
+		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": "Error al generar el token de autenticación",
+			"error": facades.Lang(ctx).Get("jwt.token_failure"),
 		})
 	}
 
 	return ctx.Response().Json(http.StatusOK, http.Json{
-		"message": "Inicio de sesión exitoso",
+		"message": facades.Lang(ctx).Get("auth.login.success"),
 		"token":   token,
 	})
 }
@@ -72,7 +73,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	err = existingUser.SearchByEmail()
 	if err == nil {
 		return ctx.Response().Json(http.StatusConflict, http.Json{
-			"error": "El email ya está registrado",
+			"error": facades.Lang(ctx).Get("auth.create.email_already_registered"),
 		})
 	}
 
@@ -89,6 +90,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	}
 
 	if err := newUser.Create(); err != nil {
+		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
 			"error": facades.Lang(ctx).Get("user.create.failure"),
 		})
@@ -96,6 +98,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	// Generar un token JWT para el nuevo usuario (opcional)
 	token, err := facades.Auth(ctx).Login(&newUser)
 	if err != nil {
+		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
 			"error": facades.Lang(ctx).Get("jwt.token_failure"),
 		})

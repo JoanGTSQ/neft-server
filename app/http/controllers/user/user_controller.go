@@ -30,7 +30,7 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 	errors, err := ctx.Request().ValidateRequest(&updateUser)
 
 	if err != nil {
-		facades.Log().Debug(err)
+		facades.Log().Error(err)
 	} else if errors != nil {
 		facades.Log().Error(errors)
 		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
@@ -55,6 +55,7 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 
 	// Validar los datos
 	if err := user.Update(name, email, password, avatar); err != nil {
+		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusBadRequest, http.Json{
 			"error": err.Error(),
 		})

@@ -24,11 +24,18 @@
   },
   "auth":{
     "user_not_valid": "Credenciales no válidas",
-    "error_login": "Error al iniciar sesión",
     "error_password": "No se ha podido generar la contraseña",
+    "login": {
+      "failure": "Error al iniciar sesión",
+      "success": "Inicio de sesión correcto",
+      "user_not_found": "Usuario no encontrado o credenciales incorrectas"
+    },
     "logout": {
       "success": "Sesión cerrada correctamente",
       "failure": "No se ha podido cerrar sesión"
+    },
+    "create":{
+      "email_already_registered": "El correo ya está registrado",
     }
   }
 }
