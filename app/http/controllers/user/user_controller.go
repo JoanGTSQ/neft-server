@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/goravel/framework/contracts/http"
+	"github.com/goravel/framework/database/orm"
 	"github.com/goravel/framework/facades"
 	"goravel/app/http/requests"
 	"goravel/app/models"
@@ -23,37 +24,41 @@ func (u *UserController) Show(ctx http.Context) http.Response {
 }
 
 func (u *UserController) Update(ctx http.Context) http.Response {
+
 	// Validamos el formulario
 	var updateUserRequest requests.UpdateUserRequest
 	errors, err := ctx.Request().ValidateRequest(&updateUserRequest)
-
 	if err != nil {
-		facades.Log().Error(err)
 	} else if errors != nil {
-		facades.Log().Error(errors)
-		return ctx.Response().Json(http.StatusUnauthorized, http.Json{
-			"error": facades.Lang(ctx).Get("user.validator.form_invalid"),
+		return ctx.Response().Json(http.StatusBadRequest, http.Json{
+			"error": errors.All(),
 		})
 	}
 
 	// Cogemos el usuario del formulario
-	var userToUpdate models.User
-	ctx.Request().Bind(&userToUpdate)
-	
+	userToUpdate := models.User{
+		Name:   updateUserRequest.Name,
+		Email:  updateUserRequest.Email,
+		Avatar: updateUserRequest.Avatar,
+		Role:   updateUserRequest.Role,
+		Model: orm.Model{
+			ID: updateUserRequest.ID,
+		},
+	}
 	// Verificamos las politicas
-	if facades.Gate().WithContext(ctx).Denies("update-user", map[string]any{
+	response := facades.Gate().WithContext(ctx).Inspect("update-user", map[string]any{
 		"targetUser": userToUpdate,
-	}) {
+	})
+	if !response.Allowed() {
 		return ctx.Response().Json(http.StatusBadRequest, http.Json{
-			"error": facades.Lang(ctx).Get("user.policies.denied"),
+			"error": response.Message(),
 		})
 	}
 
 	// Actualizamos el usuario
 	if err := userToUpdate.Update(); err != nil {
-		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusBadRequest, http.Json{
-			"error": err.Error(),
+			"error": facades.Lang(ctx).Get("user.update.failure"),
 		})
 	}
 

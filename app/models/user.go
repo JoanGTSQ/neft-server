@@ -36,6 +36,15 @@ func (u *User) SearchByEmail() error {
 	return facades.Orm().Query().Where("email = ?", u.Email).FirstOrFail(&u)
 }
 
+// Método para obtener un usuario por su email
+func UserByEmail(email string) (*User, error) {
+	var user User
+	if err := facades.Orm().Query().Where("email = ?", email).FirstOrFail(&user); err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
 func (u *User) SearchById() error {
 	return facades.Orm().Query().Where("id = ?", u.ID).FindOrFail(&u)
 }

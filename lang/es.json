@@ -15,10 +15,23 @@
       "failure": "Error al actualizar el usuario"
     },
     "policies": {
+      "email_already_taken": "El email ya está ocupado",
+      "email_check_error": "No se ha podido comprabor el email proporcionado",
       "unmatch_users": "Los usuarios no coinciden",
       "denied": "No puedes modificar este usuario"
     },
     "validator": {
+      "id_required": "ID necesario",
+      "id_invalid": "El ID proporcionado no es el tipo correcto",
+      "name_required": "Nombre necesario",
+      "name_min": "El nombre no cumple el minimo de caracteres",
+      "name_max": "El nombre sobrepasa el maximo de caracteres",
+      "email_required": "Email necesario",
+      "email_invalid": "El correo proporcionado no es el tipo correcto",
+      "avatar_required": "Avatar necesario",
+      "avatar_invalid": "El avatar proporcionado no es el tipo correcto",
+      "role_required": "Rol necesario",
+      "role_invalid": "El rol proporcionado no es el tipo correcto",
       "form_invalid": "Formulario enviado no correcto"
     }
   },
@@ -28,14 +41,14 @@
     "login": {
       "failure": "Error al iniciar sesión",
       "success": "Inicio de sesión correcto",
-      "user_not_found": "Usuario no encontrado o credenciales incorrectas"
+      "email_not_found": "Usuario no encontrado"
     },
     "logout": {
       "success": "Sesión cerrada correctamente",
       "failure": "No se ha podido cerrar sesión"
     },
     "create":{
-      "email_already_registered": "El correo ya está registrado",
+      "email_already_registered": "El correo ya está registrado"
     }
   }
 }
