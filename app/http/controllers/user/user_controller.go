@@ -53,8 +53,8 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 		userToUpdate.Name = updateUserRequest.Name
 	} else if updateUserRequest.Email != "" {
 		userToUpdate.Email = updateUserRequest.Email
-		//TODO } else if (updateUserRequest.Password != ""){
-		//userToUpdate.Password = updateUserRequest.Password
+	} else if updateUserRequest.Password != "" {
+		userToUpdate.Password = updateUserRequest.Password
 	} else if updateUserRequest.Role != "" {
 		userToUpdate.Role = updateUserRequest.Role
 	} else if updateUserRequest.Avatar != "" {
