@@ -25,6 +25,10 @@ func (r *UserPolicy) Update(ctx context.Context, arguments map[string]any) contr
 		return access.NewDenyResponse(facades.Lang(ctx).Get("user.policies.email_check_error"))
 	}
 
+	if user.Role == "admin" {
+		return access.NewAllowResponse()
+	}
+
 	// Si el correo electrónico ya está registrado y no es del usuario actual
 	if existingUser != nil && existingUser.ID != user.ID {
 		// El correo ya pertenece a otro usuario
@@ -38,5 +42,4 @@ func (r *UserPolicy) Update(ctx context.Context, arguments map[string]any) contr
 
 	// Si no es el mismo usuario, denegar
 	return access.NewDenyResponse(facades.Lang(ctx).Get("user.policies.unmatch_users"))
-
 }

@@ -1,4 +1,4 @@
-{ 
+{
   "jwt": {
     "token_failure": "No se pudo generar el token"
   },
@@ -21,8 +21,12 @@
       "id_required": "ID necesario",
       "id_invalid": "El ID proporcionado no es el tipo correcto",
       "name_required": "Nombre necesario",
-      "name_min": "El nombre no cumple el mínimo de caracteres",
-      "name_max": "El nombre sobrepasa el máximo de caracteres",
+      "name_min": "El nombre no cumple el minimo de caracteres",
+      "name_max": "El nombre sobrepasa el maximo de caracteres",
+      "psswd_required": "Contraseña necesario",
+      "psswd_invalid": "La contraseña proporcionada no es el tipo correcto",
+      "psswd_min": "La contraseña no cumple el minimo de caracteres",
+      "psswd_max": "La contraseña sobrepasa el maximo de caracteres",
       "email_required": "Email necesario",
       "email_invalid": "El correo proporcionado no es el tipo correcto",
       "avatar_required": "Avatar necesario",
@@ -69,7 +73,7 @@
       "rating": {
         "numeric": "La calificación debe ser un valor numérico.",
         "min": "La calificación debe ser al menos 0.0.",
-        "max": "La calificación no puede ser superior a 5.0.",
+        "max": "La calificación no puede ser superior a 5.0."
       },
       "location": {
         "required": "La ubicación es necesaria.",
@@ -151,7 +155,7 @@
       },
       "message": {
         "required": "Se requiere un mensaje describiendo la advertencia.",
-        "max": "El mensaje de advertencia no puede superar los 255 caracteres.",
+        "max": "El mensaje de advertencia no puede superar los 255 caracteres."
       },
       "location": {
         "required": "Se requiere la ubicación.",
