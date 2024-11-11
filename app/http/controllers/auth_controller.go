@@ -38,7 +38,7 @@ func (a *AuthController) Login(ctx http.Context) http.Response {
 	if err != nil {
 		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": facades.Lang(ctx).Get("jwt.token_failure"),
+			"error": facades.Lang(ctx).Get("jwt.token_generation.failure"),
 		})
 	}
 
@@ -58,7 +58,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	// Valida el formulario
 	var registerUser requests.AuthRegisterRequest
 	errors, err := ctx.Request().ValidateRequest(&registerUser)
-	
+
 	if err != nil {
 		facades.Log().Debug(err)
 	} else if errors != nil {
@@ -101,7 +101,7 @@ func (c *AuthController) Register(ctx http.Context) http.Response {
 	if err != nil {
 		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": facades.Lang(ctx).Get("jwt.token_failure"),
+			"error": facades.Lang(ctx).Get("jwt.token_generation.failure"),
 		})
 	}
 

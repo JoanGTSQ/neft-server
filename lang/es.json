@@ -1,11 +1,8 @@
-{
-  "required": {
-    "user_id": "UserID is required"
-  },
+{ 
   "jwt": {
     "token_failure": "No se pudo generar el token"
   },
-  "user":{
+  "user": {
     "create": {
       "success": "Usuario creado correctamente",
       "failure": "No se ha podido crear el usuario"
@@ -16,7 +13,7 @@
     },
     "policies": {
       "email_already_taken": "El email ya está ocupado",
-      "email_check_error": "No se ha podido comprabor el email proporcionado",
+      "email_check_error": "No se ha podido comprobar el email proporcionado",
       "unmatch_users": "Los usuarios no coinciden",
       "denied": "No puedes modificar este usuario"
     },
@@ -24,18 +21,18 @@
       "id_required": "ID necesario",
       "id_invalid": "El ID proporcionado no es el tipo correcto",
       "name_required": "Nombre necesario",
-      "name_min": "El nombre no cumple el minimo de caracteres",
-      "name_max": "El nombre sobrepasa el maximo de caracteres",
+      "name_min": "El nombre no cumple el mínimo de caracteres",
+      "name_max": "El nombre sobrepasa el máximo de caracteres",
       "email_required": "Email necesario",
       "email_invalid": "El correo proporcionado no es el tipo correcto",
       "avatar_required": "Avatar necesario",
       "avatar_invalid": "El avatar proporcionado no es el tipo correcto",
       "role_required": "Rol necesario",
       "role_invalid": "El rol proporcionado no es el tipo correcto",
-      "form_invalid": "Formulario enviado no correcto"
+      "form_invalid": "Formulario enviado no es correcto"
     }
   },
-  "auth":{
+  "auth": {
     "user_not_valid": "Credenciales no válidas",
     "error_password": "No se ha podido generar la contraseña",
     "login": {
@@ -47,8 +44,119 @@
       "success": "Sesión cerrada correctamente",
       "failure": "No se ha podido cerrar sesión"
     },
-    "create":{
+    "create": {
       "email_already_registered": "El correo ya está registrado"
+    }
+  },
+  "protector": {
+    "create": {
+      "success": "Protector registrado correctamente",
+      "failure": "No se ha podido registrar el protector"
+    },
+    "update": {
+      "success": "Protector actualizado correctamente",
+      "failure": "No se ha podido actualizar el protector"
+    },
+    "validator": {
+      "user_id":{
+        "required": "Se requiere el ID del usuario.",
+        "not_exist": "El usuario no existe."
+      },
+      "status": {
+        "required": "El estado es necesario.",
+        "in": "El estado debe ser uno de los siguientes: available, busy, unavailable."
+      },
+      "rating": {
+        "numeric": "La calificación debe ser un valor numérico.",
+        "min": "La calificación debe ser al menos 0.0.",
+        "max": "La calificación no puede ser superior a 5.0.",
+      },
+      "location": {
+        "required": "La ubicación es necesaria.",
+        "json": "La ubicación debe ser un objeto JSON válido."
+      }
+    }
+  },
+  "service": {
+    "create": {
+      "success": "Servicio creado correctamente",
+      "failure": "No se ha podido crear el servicio"
+    },
+    "update": {
+      "success": "Servicio actualizado correctamente",
+      "failure": "No se ha podido actualizar el servicio"
+    },
+    "status_update": {
+      "success": "Estado del servicio actualizado",
+      "failure": "No se ha podido actualizar el estado del servicio",
+      "invalid_status": "Estado no válido"
+    },
+    "validator": {
+      "user_id":{
+        "required": "Se requiere el ID del usuario.",
+        "not_exist": "El usuario no existe."
+      },
+      "protector_id_not_exists": "El ID del protector es inválido o no existe.",
+      "type": {
+        "required": "El tipo de servicio es necesario.",
+        "in": "El tipo de servicio debe ser uno de los siguientes: urgency, accompany, meet, learn, warning."
+      },
+      "location": {
+        "required": "Se requiere la ubicación.",
+        "json": "La ubicación debe ser un objeto JSON válido."
+      },
+      "scheduled_at": {
+        "date": "El horario programado debe ser una fecha válida."
+      }
+    }
+  },
+  "volunteer": {
+    "register": {
+      "success": "Voluntario registrado correctamente",
+      "failure": "No se ha podido registrar al voluntario"
+    },
+    "update": {
+      "success": "Voluntario actualizado correctamente",
+      "failure": "No se ha podido actualizar al voluntario"
+    },
+    "validator": {
+      "user_id":{
+        "required": "Se requiere el ID del usuario.",
+        "not_exist": "El usuario no existe."
+      },
+      "training": {
+        "required": "El estado de finalización del entrenamiento es necesario.",
+        "boolean": "El estado de finalización del entrenamiento debe ser un valor booleano (true/false)."
+      },
+      "points": {
+        "required": "Se requieren los puntos del voluntario.",
+        "integer": "Los puntos deben ser un número entero.",
+        "min": "Los puntos deben ser al menos 0."
+      }
+    }
+  },
+  "warning": {
+    "create": {
+      "success": "Advertencia creada correctamente",
+      "failure": "No se ha podido crear la advertencia"
+    },
+    "update": {
+      "success": "Advertencia actualizada correctamente",
+      "failure": "No se ha podido actualizar la advertencia"
+    },
+    "validator": {
+      "user_id":{
+        "required": "Se requiere el ID del usuario.",
+        "not_exist": "El usuario no existe."
+      },
+      "message": {
+        "required": "Se requiere un mensaje describiendo la advertencia.",
+        "max": "El mensaje de advertencia no puede superar los 255 caracteres.",
+      },
+      "location": {
+        "required": "Se requiere la ubicación.",
+        "json": "La ubicación debe ser un objeto JSON válido."
+      }
     }
   }
 }

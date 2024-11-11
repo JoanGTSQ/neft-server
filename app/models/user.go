@@ -12,6 +12,8 @@ type User struct {
 	Password string `json:"password" gorm:"column:password"`
 	Role     string `json:"role" gorm:"column:role"`
 	Avatar   string `json:"avatar" gorm:"column:avatar"`
+	//Protector Protector `gorm:"foreignKey:UserID"`
+	//Volunteer Volunteer `gorm:"foreignKey:UserID"`
 }
 
 // HashPassword encripta la contraseña y la asigna al usuario

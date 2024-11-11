@@ -1,0 +1,122 @@
+{
+  "required": {
+    "user_id": "UserID és necessari"
+  },
+  "jwt": {
+    "token_failure": "No s'ha pogut generar el token"
+  },
+  "user": {
+    "create": {
+      "success": "Usuari creat correctament",
+      "failure": "No s'ha pogut crear l'usuari"
+    },
+    "update": {
+      "success": "Usuari actualitzat correctament",
+      "failure": "Error al actualitzar l'usuari"
+    },
+    "policies": {
+      "email_already_taken": "L'email ja està ocupat",
+      "email_check_error": "No s'ha pogut comprovar el correu electrònic",
+      "unmatch_users": "Els usuaris no coincideixen",
+      "denied": "No pots modificar aquest usuari"
+    },
+    "validator": {
+      "id_required": "ID necessari",
+      "id_invalid": "L'ID proporcionat no és del tipus correcte",
+      "name_required": "Nom necessari",
+      "name_min": "El nom no compleix el mínim de caràcters",
+      "name_max": "El nom supera el màxim de caràcters",
+      "email_required": "Correu electrònic necessari",
+      "email_invalid": "El correu proporcionat no és del tipus correcte",
+      "avatar_required": "Avatar necessari",
+      "avatar_invalid": "L'avatar proporcionat no és del tipus correcte",
+      "role_required": "Rol necessari",
+      "role_invalid": "El rol proporcionat no és del tipus correcte",
+      "form_invalid": "Formulari enviat no és correcte"
+    }
+  },
+  "auth": {
+    "user_not_valid": "Credencials no vàlides",
+    "error_password": "No s'ha pogut generar la contrasenya",
+    "login": {
+      "failure": "Error al iniciar sessió",
+      "success": "Sessió iniciada correctament",
+      "email_not_found": "Usuari no trobat"
+    },
+    "logout": {
+      "success": "Sessió tancada correctament",
+      "failure": "No s'ha pogut tancar la sessió"
+    },
+    "create": {
+      "email_already_registered": "El correu ja està registrat"
+    }
+  },
+  "protector": {
+    "create": {
+      "success": "Protector registrat correctament",
+      "failure": "No s'ha pogut registrar el protector"
+    },
+    "update": {
+      "success": "Protector actualitzat correctament",
+      "failure": "No s'ha pogut actualitzar el protector"
+    },
+    "validator": {
+      "id_required": "ID del protector és necessari",
+      "status_required": "L'estat del protector és necessari",
+      "rating_invalid": "La qualificació ha de ser entre 0.0 i 5.0",
+      "location_invalid": "Ubicació proporcionada no és vàlida"
+    }
+  },
+  "service": {
+    "create": {
+      "success": "Servei creat correctament",
+      "failure": "No s'ha pogut crear el servei"
+    },
+    "update": {
+      "success": "Servei actualitzat correctament",
+      "failure": "No s'ha pogut actualitzar el servei"
+    },
+    "status_update": {
+      "success": "Estat del servei actualitzat",
+      "failure": "No s'ha pogut actualitzar l'estat del servei",
+      "invalid_status": "Estat no vàlid"
+    },
+    "validator": {
+      "id_required": "ID del servei és necessari",
+      "type_required": "Tipus de servei és necessari",
+      "user_id_required": "Usuari és necessari",
+      "protector_id_required": "Protector és necessari",
+      "location_invalid": "Ubicació proporcionada no és vàlida"
+    }
+  },
+  "volunteer": {
+    "register": {
+      "success": "Voluntari registrat correctament",
+      "failure": "No s'ha pogut registrar el voluntari"
+    },
+    "update": {
+      "success": "Voluntari actualitzat correctament",
+      "failure": "No s'ha pogut actualitzar el voluntari"
+    },
+    "validator": {
+      "id_required": "ID del voluntari és necessari",
+      "training_required": "La formació és necessària",
+      "points_invalid": "Punts proporcionats no vàlids"
+    }
+  },
+  "warning": {
+    "create": {
+      "success": "Advertència creada correctament",
+      "failure": "No s'ha pogut crear l'advertència"
+    },
+    "update": {
+      "success": "Advertència actualitzada correctament",
+      "failure": "No s'ha pogut actualitzar l'advertència"
+    },
+    "validator": {
+      "id_required": "ID de l'advertència és necessari",
+      "description_required": "Descripció necessària",
+      "location_invalid": "Ubicació de l'advertència no és vàlida"
+    }
+  }
+}

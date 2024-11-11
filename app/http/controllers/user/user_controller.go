@@ -1,11 +1,12 @@
 package user
 
 import (
+	"goravel/app/http/requests"
+	"goravel/app/models"
+
 	"github.com/goravel/framework/contracts/http"
 	"github.com/goravel/framework/database/orm"
 	"github.com/goravel/framework/facades"
-	"goravel/app/http/requests"
-	"goravel/app/models"
 )
 
 type UserController struct {
@@ -37,14 +38,29 @@ func (u *UserController) Update(ctx http.Context) http.Response {
 
 	// Cogemos el usuario del formulario
 	userToUpdate := models.User{
-		Name:   updateUserRequest.Name,
-		Email:  updateUserRequest.Email,
-		Avatar: updateUserRequest.Avatar,
-		Role:   updateUserRequest.Role,
 		Model: orm.Model{
 			ID: updateUserRequest.ID,
 		},
 	}
+
+	if err := userToUpdate.SearchById(); err != nil {
+		return ctx.Response().Json(http.StatusBadRequest, http.Json{
+			"error": facades.Lang(ctx).Get("user.update.failure"),
+		})
+	}
+
+	if updateUserRequest.Name != "" {
+		userToUpdate.Name = updateUserRequest.Name
+	} else if updateUserRequest.Email != "" {
+		userToUpdate.Email = updateUserRequest.Email
+		//TODO } else if (updateUserRequest.Password != ""){
+		//userToUpdate.Password = updateUserRequest.Password
+	} else if updateUserRequest.Role != "" {
+		userToUpdate.Role = updateUserRequest.Role
+	} else if updateUserRequest.Avatar != "" {
+		userToUpdate.Avatar = updateUserRequest.Avatar
+	}
+
 	// Verificamos las politicas
 	response := facades.Gate().WithContext(ctx).Inspect("update-user", map[string]any{
 		"targetUser": userToUpdate,

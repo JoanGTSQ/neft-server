@@ -1,0 +1,137 @@
+{
+  "required": {
+    "user_id": "UserID is required"
+  },
+  "jwt": {
+    "token_failure": "Failed to generate token"
+  },
+  "user": {
+    "create": {
+      "success": "User successfully created",
+      "failure": "Failed to create user"
+    },
+    "update": {
+      "success": "User successfully updated",
+      "failure": "Failed to update user"
+    },
+    "policies": {
+      "email_already_taken": "Email is already taken",
+      "email_check_error": "Failed to check provided email",
+      "unmatch_users": "Users do not match",
+      "denied": "You cannot modify this user"
+    },
+    "validator": {
+      "id_required": "ID is required",
+      "id_invalid": "Provided ID is of incorrect type",
+      "name_required": "Name is required",
+      "name_min": "Name does not meet minimum character requirement",
+      "name_max": "Name exceeds maximum character limit",
+      "email_required": "Email is required",
+      "email_invalid": "Provided email is of incorrect type",
+      "avatar_required": "Avatar is required",
+      "avatar_invalid": "Provided avatar is of incorrect type",
+      "role_required": "Role is required",
+      "role_invalid": "Provided role is of incorrect type",
+      "form_invalid": "Submitted form is incorrect"
+    }
+  },
+  "auth": {
+    "user_not_valid": "Invalid credentials",
+    "error_password": "Failed to generate password",
+    "login": {
+      "failure": "Failed to log in",
+      "success": "Successfully logged in",
+      "email_not_found": "User not found"
+    },
+    "logout": {
+      "success": "Successfully logged out",
+      "failure": "Failed to log out"
+    },
+    "create": {
+      "email_already_registered": "Email is already registered"
+    }
+  },
+  "protector": {
+    "create": {
+      "success": "Protector successfully registered",
+      "failure": "Failed to register protector"
+    },
+    "update": {
+      "success": "Protector successfully updated",
+      "failure": "Failed to update protector"
+    },
+    "validator": {
+      "id_required": "Protector ID is required",
+      "status_required": "Protector status is required",
+      "rating_invalid": "Rating must be between 0.0 and 5.0",
+      "location_invalid": "Provided location is invalid"
+    }
+  },
+  "service": {
+    "create": {
+      "success": "Service successfully created",
+      "failure": "Failed to create service"
+    },
+    "update": {
+      "success": "Service successfully updated",
+      "failure": "Failed to update service"
+    },
+    "status_update": {
+      "success": "Service status updated",
+      "failure": "Failed to update service status",
+      "invalid_status": "Invalid status"
+    },
+    "validator": {
+      "id_required": "Service ID is required",
+      "type_required": "Service type is required",
+      "user_id_required": "User ID is required",
+      "protector_id_required": "Protector ID is required",
+      "location_invalid": "Provided location is invalid"
+    }
+  },
+  "volunteer": {
+    "register": {
+      "success": "Volunteer successfully registered",
+      "failure": "Failed to register volunteer"
+    },
+    "update": {
+      "success": "Volunteer successfully updated",
+      "failure": "Failed to update volunteer"
+    },
+    "validator": {
+      "id_required": "Volunteer ID is required",
+      "training_required": "Training is required",
+      "points_invalid": "Provided points are invalid"
+    }
+  },
+  "warning": {
+    "create": {
+      "success": "Warning successfully created",
+      "failure": "Failed to create warning"
+    },
+    "update": {
+      "success": "Warning successfully updated",
+      "failure": "Failed to update warning"
+    },
+    "validator": {
+      "id_required": "Warning ID is required",
+      "description_required": "Description is required",
+      "location_invalid": "Warning location is invalid"
+    }
+  },
+  "device_gps": {
+    "register": {
+      "success": "GPS device successfully registered",
+      "failure": "Failed to register GPS device"
+    },
+    "update": {
+      "success": "GPS device successfully updated",
+      "failure": "Failed to update GPS device"
+    },
+    "validator": {
+      "id_required": "GPS device ID is required",
+      "device_type_required": "Device type is required",
+      "status_invalid": "GPS device status is invalid"
+    }
+  }
+}
