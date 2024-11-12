@@ -28,15 +28,15 @@ func (r *CreateProtectorRequest) Rules(ctx http.Context) map[string]string {
 
 func (r *CreateProtectorRequest) Messages(ctx http.Context) map[string]string {
 	return map[string]string{
-		"user_id.required":  facades.Lang(ctx).Get("protector.user_id_required"),
-		"user_id.exists":    facades.Lang(ctx).Get("protector.user_id_invalid"),
-		"status.required":   facades.Lang(ctx).Get("protector.status_required"),
-		"status.in":         facades.Lang(ctx).Get("protector.status_invalid"),
-		"rating.numeric":    facades.Lang(ctx).Get("protector.rating_invalid"),
-		"rating.min":        facades.Lang(ctx).Get("protector.rating_min"),
-		"rating.max":        facades.Lang(ctx).Get("protector.rating_max"),
-		"location.required": facades.Lang(ctx).Get("protector.location_required"),
-		"location.json":     facades.Lang(ctx).Get("protector.location_invalid"),
+		"user_id.required":  facades.Lang(ctx).Get("protector.user_id.required"),
+		"user_id.exists":    facades.Lang(ctx).Get("protector.user_id.not_exist"),
+		"status.required":   facades.Lang(ctx).Get("protector.status.required"),
+		"status.in":         facades.Lang(ctx).Get("protector.status.in"),
+		"rating.numeric":    facades.Lang(ctx).Get("protector.rating.numeric"),
+		"rating.min":        facades.Lang(ctx).Get("protector.rating.min"),
+		"rating.max":        facades.Lang(ctx).Get("protector.rating.max"),
+		"location.required": facades.Lang(ctx).Get("protector.location.required"),
+		"location.json":     facades.Lang(ctx).Get("protector.location.json"),
 	}
 }
 

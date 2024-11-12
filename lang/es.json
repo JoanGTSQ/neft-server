@@ -1,15 +1,33 @@
 {
+  "common": {
+    "user_id": {
+      "required": "Se requiere el ID del usuario.",
+      "not_exist": "El usuario no existe."
+    },
+    "location": {
+      "required": "Se requiere la ubicación.",
+      "json": "La ubicación debe ser un objeto JSON válido."
+    },
+    "create": {
+      "success": "{entity} creado correctamente",
+      "failure": "No se ha podido crear {entity}"
+    },
+    "update": {
+      "success": "{entity} actualizado correctamente",
+      "failure": "No se ha podido actualizar {entity}"
+    }
+  },
   "jwt": {
     "token_failure": "No se pudo generar el token"
   },
   "user": {
     "create": {
-      "success": "Usuario creado correctamente",
-      "failure": "No se ha podido crear el usuario"
+      "success": "@common.create.success, entity: Usuario",
+      "failure": "@common.create.failure, entity: Usuario"
     },
     "update": {
-      "success": "Usuario actualizado correctamente",
-      "failure": "Error al actualizar el usuario"
+      "success": "@common.update.success, entity: Usuario",
+      "failure": "@common.update.failure, entity: Usuario"
     },
     "policies": {
       "email_already_taken": "El email ya está ocupado",
@@ -54,18 +72,15 @@
   },
   "protector": {
     "create": {
-      "success": "Protector registrado correctamente",
-      "failure": "No se ha podido registrar el protector"
+      "success": "@common.create.success, entity: Protector",
+      "failure": "@common.create.failure, entity: Protector"
     },
     "update": {
-      "success": "Protector actualizado correctamente",
-      "failure": "No se ha podido actualizar el protector"
+      "success": "@common.update.success, entity: Protector",
+      "failure": "@common.update.failure, entity: Protector"
     },
     "validator": {
-      "user_id":{
-        "required": "Se requiere el ID del usuario.",
-        "not_exist": "El usuario no existe."
-      },
+      "user_id": "@common.user_id",
       "status": {
         "required": "El estado es necesario.",
         "in": "El estado debe ser uno de los siguientes: available, busy, unavailable."
@@ -75,20 +90,17 @@
         "min": "La calificación debe ser al menos 0.0.",
         "max": "La calificación no puede ser superior a 5.0."
       },
-      "location": {
-        "required": "La ubicación es necesaria.",
-        "json": "La ubicación debe ser un objeto JSON válido."
-      }
+      "location": "@common.location"
     }
   },
   "service": {
     "create": {
-      "success": "Servicio creado correctamente",
-      "failure": "No se ha podido crear el servicio"
+      "success": "@common.create.success, entity: Servicio",
+      "failure": "@common.create.failure, entity: Servicio"
     },
     "update": {
-      "success": "Servicio actualizado correctamente",
-      "failure": "No se ha podido actualizar el servicio"
+      "success": "@common.update.success, entity: Servicio",
+      "failure": "@common.update.failure, entity: Servicio"
     },
     "status_update": {
       "success": "Estado del servicio actualizado",
@@ -96,19 +108,13 @@
       "invalid_status": "Estado no válido"
     },
     "validator": {
-      "user_id":{
-        "required": "Se requiere el ID del usuario.",
-        "not_exist": "El usuario no existe."
-      },
+      "user_id": "@common.user_id",
       "protector_id_not_exists": "El ID del protector es inválido o no existe.",
       "type": {
         "required": "El tipo de servicio es necesario.",
         "in": "El tipo de servicio debe ser uno de los siguientes: urgency, accompany, meet, learn, warning."
       },
-      "location": {
-        "required": "Se requiere la ubicación.",
-        "json": "La ubicación debe ser un objeto JSON válido."
-      },
+      "location": "@common.location",
       "scheduled_at": {
         "date": "El horario programado debe ser una fecha válida."
       }
@@ -124,10 +130,7 @@
       "failure": "No se ha podido actualizar al voluntario"
     },
     "validator": {
-      "user_id":{
-        "required": "Se requiere el ID del usuario.",
-        "not_exist": "El usuario no existe."
-      },
+      "user_id": "@common.user_id",
       "training": {
         "required": "El estado de finalización del entrenamiento es necesario.",
         "boolean": "El estado de finalización del entrenamiento debe ser un valor booleano (true/false)."
@@ -149,18 +152,12 @@
       "failure": "No se ha podido actualizar la advertencia"
     },
     "validator": {
-      "user_id":{
-        "required": "Se requiere el ID del usuario.",
-        "not_exist": "El usuario no existe."
-      },
+      "user_id": "@common.user_id",
       "message": {
         "required": "Se requiere un mensaje describiendo la advertencia.",
         "max": "El mensaje de advertencia no puede superar los 255 caracteres."
       },
-      "location": {
-        "required": "Se requiere la ubicación.",
-        "json": "La ubicación debe ser un objeto JSON válido."
-      }
+      "location": "@common.location"
     }
   }
 }

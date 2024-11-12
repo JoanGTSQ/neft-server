@@ -26,9 +26,12 @@ func (r *CreateVolunteerRequest) Rules(ctx http.Context) map[string]string {
 
 func (r *CreateVolunteerRequest) Messages(ctx http.Context) map[string]string {
 	return map[string]string{
-		"user_id.required":            facades.Lang(ctx).Get("volunteer.user_id_required"),
-		"training_completed.required": facades.Lang(ctx).Get("volunteer.training_completed_required"),
-		"points.required":             facades.Lang(ctx).Get("volunteer.points_required"),
+		"user_id.required":            facades.Lang(ctx).Get("volunteer.user_id.required"),
+		"training_completed.required": facades.Lang(ctx).Get("volunteer.training.required"),
+		"training_completed.boolean":  facades.Lang(ctx).Get("volunteer.training.boolean"),
+		"points.required":             facades.Lang(ctx).Get("volunteer.points.required"),
+		"pints.integer":               facades.Lang(ctx).Get("volunteer.points.integer"),
+		"points.min":                  facades.Lang(ctx).Get("volunteer.points.min"),
 	}
 }
 

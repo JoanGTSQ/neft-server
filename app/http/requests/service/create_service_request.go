@@ -31,10 +31,12 @@ func (r *CreateServiceRequest) Rules(ctx http.Context) map[string]string {
 func (r *CreateServiceRequest) Messages(ctx http.Context) map[string]string {
 	return map[string]string{
 		"user_id.required":    facades.Lang(ctx).Get("service.user_id_required"),
-		"protector_id.exists": facades.Lang(ctx).Get("service.protector_id_invalid"),
-		"type.required":       facades.Lang(ctx).Get("service.type_required"),
-		"location.required":   facades.Lang(ctx).Get("service.location_required"),
-		"scheduled_at.date":   facades.Lang(ctx).Get("service.scheduled_at_invalid"),
+		"protector_id.exists": facades.Lang(ctx).Get("service.protector_id_not_exists"),
+		"type.required":       facades.Lang(ctx).Get("service.type.required"),
+		"type.in":             facades.Lang(ctx).Get("service.type.in"),
+		"location.required":   facades.Lang(ctx).Get("service.location.required"),
+		"location.json":       facades.Lang(ctx).Get("service.location.json"),
+		"scheduled_at.date":   facades.Lang(ctx).Get("service.scheduled_at.date"),
 	}
 }
 

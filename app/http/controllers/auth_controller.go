@@ -38,7 +38,7 @@ func (a *AuthController) Login(ctx http.Context) http.Response {
 	if err != nil {
 		facades.Log().Error(err)
 		return ctx.Response().Json(http.StatusInternalServerError, http.Json{
-			"error": facades.Lang(ctx).Get("jwt.token_generation.failure"),
+			"error": facades.Lang(ctx).Get("auth.login.failure"),
 		})
 	}
 
